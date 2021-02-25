@@ -1,4 +1,5 @@
 <?php 
+    include 'User/usuario.php';
 
     session_start();
     $error=0;
@@ -27,8 +28,8 @@
         $error=3;
     }
     else if(isset($_POST['email']) && isset($_POST['pass']) ){
-        
-        if( strcmp($_POST['email'], 'perezleon.miguel') === 0 && strcmp($_POST['pass'], '1234') === 0 ){
+        $usuario = getUser();
+        if( strcmp($_POST['email'],$usuario['email']) == 0 && strcmp($_POST['pass'], $usuario['pass']) == 0 ){
             // si el email y la contraseña son correctos se guardan los datos en la sesión y se pone a 0 las veces que se ha intentado iniciar sesión
             $usuario['email']= $_POST['email'];
             $usuario['pass']= $_POST['pass'];
@@ -45,12 +46,6 @@
         // si el email de usuario no coincide se pone el error a 1
         else{
             $error=1;
-
-            //guardo en un fichero de logs que se ha intentado hacer inicio de sesión en el sitio
-            $log= sprintf("%s , <status> login failed <status>. \n", date("Y-m-d H:i:s"), $_POST['email']);
-            $fp = fopen('resources/logs/log_login.txt', 'c+');
-            fseek($fp, 0,  SEEK_END);
-            fwrite ( $fp , $log );
         }
     }
     // modifico el valor de las veces
