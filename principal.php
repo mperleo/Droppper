@@ -21,13 +21,25 @@
             $mensaje =$mensaje."</div>";
         }
         else{
+            if(!empty($_POST['nombre'])){
+                $posPunto=strpos($_FILES['archivo']['name'], '.');
+                $extension=substr( $_FILES['archivo']['name'], -(strlen($_FILES['archivo']['name']) - $posPunto ) );
+
+                move_uploaded_file($_FILES['archivo']['tmp_name'], "subidas/".$_POST['nombre'].$extension);
+
+                $nombre = $_POST['nombre'].$extension;
+            }
+            else{
+                move_uploaded_file($_FILES['archivo']['tmp_name'], "subidas/" . $_FILES['archivo']['name']);
+                $nombre= $_FILES['archivo']['name'];
+            }
+
             $mensaje= '<div class="alert alert-primary" role="alert"><b>Archivo subido con exito</b>.<hr> <b>Detalles del archivo:</b><br> ';
-            $mensaje= $mensaje."<u>Nombre</u>: " . $_FILES['archivo']['name'] . "<br>";
+            $mensaje= $mensaje."<u>Nombre</u>: " . $nombre . "<br>";
             $mensaje= $mensaje."<u>Tipo</u>: " . $_FILES['archivo']['type'] . "<br>";
             $mensaje= $mensaje."<u>Tamaño:</u> " . ($_FILES["archivo"]["size"] / 1024) . " kB<br>";
             $mensaje =$mensaje."</div>";
-
-            move_uploaded_file($_FILES['archivo']['tmp_name'], "subidas/" . $_FILES['archivo']['name']);
+            
         }
     }
 ?>
@@ -52,7 +64,7 @@
                 <div class=" text-center">
                     <h1 class="Righteous display-2"><a href="principal.php">Droppper</a></h1> 
                     <a href="index.php?logout" class="btn  btn-primary margin-buttons-lr margin-buttons-sm">Cerrar sesion</a>
-                    <a class="btn  btn-primary margin-buttons-lr margin-buttons-sm">Archivos</a>
+                    <a href="archivos.php" class="btn  btn-primary margin-buttons-lr margin-buttons-sm">Archivos</a>
                 </div>
             </header>
 
@@ -66,6 +78,9 @@
 
             <div>
                 <form action="principal.php" method="post" enctype="multipart/form-data">
+
+                    <label for="nombre" class="form-label">Indica un nombre para el archivo (opcional).</label>
+                    <input type="text" class="form-control form-control-lg margin-buttons-sm" name="nombre" id="nombre"/>
 
                     <label for="archivo" class="form-label">Selecciona un archivo para subir:</label>
                     <input type="file" class="form-control form-control-lg margin-buttons-sm" name="archivo" id="archivo"/>
