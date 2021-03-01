@@ -8,18 +8,18 @@
 
     $archivos = scandir('subidas', 1);
 
-    if(isset($_POST['archivo'])){
-        if( file_exists('subidas/'.$_POST['archivo']) ){
+    if(isset($_GET['archivo'])){
+        if( file_exists('subidas/'.$_GET['archivo']) ){
             header("Cache-Control: public");
             header("Content-Description: File Transfer");
             header("Content-type: ");
-            header("Content-disposition: attachment; filename={$_POST['archivo']}");
+            header("Content-disposition: attachment; filename={$_GET['archivo']}");
             header("Content-Transfer-Encoding: binary");
             
-            readfile('subidas/'.$_POST['archivo']);
+            readfile('subidas/'.$_GET['archivo']);
         }
         else{
-            $error="El fichero no se pudo crear";
+            $error="El fichero no se pudo descargar";
         }
     } 
 ?>
@@ -38,7 +38,7 @@
             <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
             <script src="resources/files_style/js/mdb.min.js" language="javascript" type="text/javascript"></script>
     </head>
-    <body class="d-flex justify-content-center align-items-center" style="height: 100vh">
+    <body class="d-flex justify-content-center align-items-center" style="margin-top: 10px">
         <div class="row border-h1 container">
             <header>
                 <div class=" text-center">
@@ -57,31 +57,41 @@
             ?>
 
             <div>
-                <h3>Selecciona un archivo para recuperar:</h3> <br>
-                <form method="POST" class="form-check">
-
-                    <input class="btn btn-primary btn-lg" type="submit" value="Descargar"> <br><br>
-                    
+                <h3>Selecciona un archivo para descargar:</h3> <br>
+                <div class=" row  row-cols-md-3 g-4 back-downloads " style="overflow: scroll; height:500px; margin: 10px">
                     <?php
                         foreach($archivos as $archivo){
                             if(strcmp($archivo,'.')!==0 && strcmp($archivo,'..')!==0){
-                                echo '<input type="radio" class="form-check-input" id="archivo" name="archivo" value="'.$archivo.'">';
 
-                                $posPunto=strpos($archivo, '.')+1;
-                                $extension=substr( $archivo, -(strlen($archivo) - $posPunto ) );
-
-                                if( file_exists('files_style/file_icons/file_'.$extension.'.svg') ){
-                                    echo '<label class="form-check-label" for="archivo"><img src="files_style/file_icons/file_'.$extension.'.svg" alt="'.$extension.'"> '.$archivo.'</label><br><hr>';
+                                $extension = pathinfo($archivo, PATHINFO_EXTENSION);
+                                
+                                if(strcmp($extension, 'png')===0 || strcmp($extension, 'jpeg')===0 || strcmp($extension, 'jpg')===0 || strcmp($extension, 'svg')===0 || strcmp($extension, 'gif')===0){
+                                    $imagen= 'subidas/'.$archivo;
+                                }
+                                else if( file_exists('files_style/file_icons/file_'.$extension.'.svg') ){
+                                    $imagen='files_style/file_icons/file_'.$extension.'.svg';
                                 }
                                 else{
-                                    echo '<label class="form-check-label" for="archivo"><img src="files_style/file_icons/file_.svg" alt="'.$extension.'"> '.$archivo.'</label><br><hr>';
+                                    $imagen='files_style/file_icons/file_.svg';   
                                 }
+                    ?>
+                    <div class="col">     
+                        <div class="card h-100" style="width: 12rem">
+                            <img src="<?php echo $imagen?>" class="card-img-top" alt="<?php echo $imagen?>"/>
+                            <div class="card-body">
+                                <p class="card-text"><?php echo $archivo?></p>
+                                
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="archivos.php?archivo=<?php echo $archivo?>" class="btn btn-primary">Descargar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php            
                             }
                         }
                     ?>
-                    
-                    
-                </form>
+                </div>
             
             </div>
 

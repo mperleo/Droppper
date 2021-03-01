@@ -28,6 +28,12 @@ body{
     padding: 1%;
 }
 
+.back-downloads{
+    background-color: rgb(39, 45, 49);
+    border-radius: 10px;
+    padding: 1%;
+}
+
 .Righteous{
     font-family: 'Righteous', cursive;
 }

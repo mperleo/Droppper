@@ -22,12 +22,11 @@
         }
         else{
             if(!empty($_POST['nombre'])){
-                $posPunto=strpos($_FILES['archivo']['name'], '.');
-                $extension=substr( $_FILES['archivo']['name'], -(strlen($_FILES['archivo']['name']) - $posPunto ) );
+                $extension = pathinfo($_FILES['archivo']['name'], PATHINFO_EXTENSION);
 
-                move_uploaded_file($_FILES['archivo']['tmp_name'], "subidas/".$_POST['nombre'].$extension);
+                move_uploaded_file($_FILES['archivo']['tmp_name'], "subidas/".$_POST['nombre'].'.'.$extension);
 
-                $nombre = $_POST['nombre'].$extension;
+                $nombre = $_POST['nombre'].'.'.$extension;
             }
             else{
                 move_uploaded_file($_FILES['archivo']['tmp_name'], "subidas/" . $_FILES['archivo']['name']);
