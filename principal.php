@@ -79,16 +79,17 @@
             <div>
                 <form action="principal.php" method="post" enctype="multipart/form-data">
 
+                    <p class="note note-primary"> <b>Nota</b>: Si se quiere indicar un nuevo nombre no debe contener la extensión del archivo, el campo puede dejarse vacío.</p>
                     <div class="row">
- 
+
                         <div class="col-md-6">
-                            <label for="nombre" class="form-label">Indica un nombre para el archivo (opcional).</label>
-                            <input type="text" class="form-control form-control-lg margin-buttons-sm" name="nombre" id="nombre"/>
+                            <label for="nombre" class="form-label">Indica un nombre para el archivo.</label>
+                            <input type="text" class="form-control form-control-lg" name="nombre" id="nombre"/>
                         </div>
 
                         <div class="col-md-6">
                             <label for="archivo" class="form-label">Selecciona un archivo para subir:</label>
-                            <input type="file" class="form-control form-control-lg margin-buttons-sm" name="archivo" id="archivo"/>
+                            <input type="file" class="form-control form-control-lg" name="archivo" id="archivo"/>
                         </div>
 
                     </div>
