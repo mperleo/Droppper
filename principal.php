@@ -79,13 +79,22 @@
             <div>
                 <form action="principal.php" method="post" enctype="multipart/form-data">
 
-                    <label for="nombre" class="form-label">Indica un nombre para el archivo (opcional).</label>
-                    <input type="text" class="form-control form-control-lg margin-buttons-sm" name="nombre" id="nombre"/>
+                    <div class="row">
+ 
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Indica un nombre para el archivo (opcional).</label>
+                            <input type="text" class="form-control form-control-lg margin-buttons-sm" name="nombre" id="nombre"/>
+                        </div>
 
-                    <label for="archivo" class="form-label">Selecciona un archivo para subir:</label>
-                    <input type="file" class="form-control form-control-lg margin-buttons-sm" name="archivo" id="archivo"/>
+                        <div class="col-md-6">
+                            <label for="archivo" class="form-label">Selecciona un archivo para subir:</label>
+                            <input type="file" class="form-control form-control-lg margin-buttons-sm" name="archivo" id="archivo"/>
+                        </div>
+
+                    </div>
 
                     <input type="submit" value="Subir archivo" class="btn btn-lg btn-primary btn-block margin-buttons-sm"/>
+
                 </form>
             </div>
 

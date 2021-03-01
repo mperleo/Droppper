@@ -60,6 +60,8 @@
                 <h3>Selecciona un archivo para recuperar:</h3> <br>
                 <form method="POST" class="form-check">
 
+                    <input class="btn btn-primary btn-lg" type="submit" value="Descargar"> <br><br>
+                    
                     <?php
                         foreach($archivos as $archivo){
                             if(strcmp($archivo,'.')!==0 && strcmp($archivo,'..')!==0){
@@ -78,7 +80,7 @@
                         }
                     ?>
                     
-                    <input class="btn btn-primary btn-lg" type="submit" value="Descargar">
+                    
                 </form>
             
             </div>
