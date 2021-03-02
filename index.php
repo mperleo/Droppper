@@ -69,7 +69,7 @@
     <body class="d-flex justify-content-center align-items-center" style="height: 100vh">
         <div class="border-h1 container row">
             
-            <div class="col-6">
+            <div class="col-md-6">
                 <header class="col-12">   
                     <h1 class="Righteous display-2"><a href="index.php"><img class="upload" src="files_style/upload.png" alt="upload icon"> Droppper </a></h1> 
                 </header>
@@ -110,9 +110,9 @@
                 </form>
             </div>  
 
-            <div class="col-6"> 
+            <div class="col-md-6"> 
                 <div class="text-center">
-                    <img src="files_style/Note-taking apps.svg" alt="ilustration" style="width: 30rem"/>
+                    <img src="files_style/Note-taking apps.svg" alt="ilustration" style="width: 80%"/>
                     <p><small>Sube tus archivos para descargarlos desde cualquier dispositivo</small></p>
                 </div>       
             </div>  

@@ -58,7 +58,7 @@
 
             <div>
                 <h3>Selecciona un archivo para descargar:</h3> <br>
-                <div class=" row  row-cols-md-3 g-4 back-downloads " style="overflow: scroll; height:500px; margin: 10px">
+                <div class="row g-4 back-downloads" style="overflow: auto; height:500px; margin: 10px">
                     <?php
                         foreach($archivos as $archivo){
                             if(strcmp($archivo,'.')!==0 && strcmp($archivo,'..')!==0){
@@ -75,8 +75,8 @@
                                     $imagen='files_style/file_icons/file_.svg';   
                                 }
                     ?>
-                    <div class="col">     
-                        <div class="card h-100" style="width: 12rem">
+                    <div class="col-md-4">     
+                        <div class="card" style="width: 13rem; height:25rem;">
                             <img src="<?php echo $imagen?>" class="card-img-top" alt="<?php echo $imagen?>"/>
                             <div class="card-body">
                                 <p class="card-text"><?php echo $archivo?></p>
@@ -92,7 +92,6 @@
                         }
                     ?>
                 </div>
-            
             </div>
 
             <footer class="text-center">
