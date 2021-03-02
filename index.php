@@ -68,42 +68,56 @@
     </head>
     <body class="d-flex justify-content-center align-items-center" style="height: 100vh">
         <div class="border-h1 container row">
-            <header class="col-12">   
-                <h1 class="Righteous display-2"><a href="index.php"><img class="upload" src="files_style/upload.png" alt="upload icon"> Droppper </a></h1> 
-            </header>
+            
+            <div class="col-6">
+                <header class="col-12">   
+                    <h1 class="Righteous display-2"><a href="index.php"><img class="upload" src="files_style/upload.png" alt="upload icon"> Droppper </a></h1> 
+                </header>
+    
+                
+                <?php 
+                // muestro los errores según el valor de la variable
+                if($error==1){
+                    echo '<p class="alert alert-warning"> <strong>Aviso:</strong> No has indicado unos datos validos. </p>';
+                    echo "<hr>";
+                }
 
-            <?php 
-            // muestro los errores según el valor de la variable
-            if($error==1){
-                echo '<p class="alert alert-warning"> <strong>Aviso:</strong> No has indicado unos datos validos. </p>';
-                echo "<hr>";
-            }
+                if($error==2){
+                    echo '<p class="alert alert-warning"> <strong>Aviso:</strong> Para acceder a la página primero debes iniciar sesión </p>';
+                    echo "<hr>";
+                }
 
-            if($error==2){
-                echo '<p class="alert alert-warning"> <strong>Aviso:</strong> Para acceder a la página primero debes iniciar sesión </p>';
-                echo "<hr>";
-            }
+                // si el error es el 3, fallado muchas veces el formulario
+                if($error==3){
+                    echo '<p class="alert alert-danger"> <strong>Error:</strong> Entrada al sitio bloqueada por fallar '.$veces.' veces</p>';
+                }
+                // muestro el formulario si no esta bloqueado por fallar más de 5 veces
+                else{
+                ?>
 
-            // si el error es el 3, fallado muchas veces el formulario
-            if($error==3){
-                echo '<p class="alert alert-danger"> <strong>Error:</strong> Entrada al sitio bloqueada por fallar '.$veces.' veces</p>';
-            }
-            // muestro el formulario si no esta bloqueado por fallar más de 5 veces
-            else{
-            ?>
+                <!--<div class="col-6">-->
+                <form action="index.php" method="post">
+                    <!-- Email input -->
+                    <label class="form-label" for="email">Correo</label>
+                    <input type="text" id="email" name="email" class="form-control mb-4" />
 
-            <form action="index.php" method="post">
-                <!-- Email input -->
-                <label class="form-label" for="email">Correo</label>
-                <input type="text" id="email" name="email" class="form-control mb-4" />
+                    <!-- Password input -->
+                    <label class="form-label " for="pass">Contraseña</label>
+                    <input type="password" id="pass" name="pass" class="form-control mb-4" />
 
-                <!-- Password input -->
-                <label class="form-label " for="pass">Contraseña</label>
-                <input type="password" id="pass" name="pass" class="form-control mb-4" />
+                    <!-- Submit button -->
+                    <button type="submit" class="btn mb-4 btn-primary btn-block col-12">Sign in</button>
+                </form>
+            </div>  
 
-                <!-- Submit button -->
-                <button type="submit" class="btn mb-4 btn-primary btn-block col-12">Sign in</button>
-            </form>
+            <div class="col-6"> 
+                <div class="text-center">
+                    <img src="files_style/Note-taking apps.svg" alt="ilustration" style="width: 30rem"/>
+                    <p><small>Sube tus archivos para descargarlos desde cualquier dispositivo</small></p>
+                </div>       
+            </div>  
+
+            
         </div>
 
         <?php }?>
