@@ -12,7 +12,7 @@
         if( file_exists('subidas/'.$_GET['archivo']) ){
             header("Cache-Control: public");
             header("Content-Description: File Transfer");
-            header("Content-type: ");
+            header("Content-type: ".mime_content_type($_GET['archivo']));
             header("Content-disposition: attachment; filename={$_GET['archivo']}");
             header("Content-Transfer-Encoding: binary");
             
