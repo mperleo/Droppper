@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php 
     session_start();
 
@@ -11,18 +10,33 @@
 
     if(isset($_GET['archivo'])){
         if( file_exists('subidas/'.$_GET['archivo']) ){
+            $zip = new ZipArchive(); 
+
+            $n_archivo = substr($_GET['archivo'], 0, strpos($_GET['archivo'],'.')).'.zip';
+
+            if($zip->open('tmp/'.$n_archivo,ZipArchive::CREATE)===true){
+                $zip->addFile('subidas/'.$_GET['archivo'], $_GET['archivo']);
+                $zip->close();
+            } 
+
             header("Cache-Control: public");
             header("Content-Description: File Transfer");
-            header("Content-type: ".mime_content_type($_GET['archivo']));
-            header("Content-disposition: attachment; filename={$_GET['archivo']}");
+            header("Content-type: application/zip");
+            header("Content-disposition: attachment; filename={$n_archivo}");
             header("Content-Transfer-Encoding: binary");
+            header("Content-file: attachment; filename={$n_archivo}");
+
+            flush();
+            readfile('tmp/'.$n_archivo);
             
-            readfile('subidas/'.$_GET['archivo']);
+            // deleting all the files on the server
+            unlink('tmp/'.$n_archivo);  
         }
         else{
             $error="El fichero no se pudo descargar";
         }
-    } 
+    }
+    else{ 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -104,3 +118,6 @@
     </body>
 
 </html>
+<?php
+    }
+?>
